@@ -1,0 +1,55 @@
+# Pre-commit hooks configuration
+# See https://pre-commit.com for more information
+# Setup: pip install pre-commit && pre-commit install
+
+repos:
+  # Basic file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        name: Remove trailing whitespace
+        exclude: \.(svg)$
+      - id: end-of-file-fixer
+        name: Fix end of files
+        exclude: \.(svg)$
+      - id: check-yaml
+        name: Check YAML syntax
+      - id: check-json
+        name: Check JSON syntax
+      - id: check-added-large-files
+        name: Prevent large files (>5MB)
+        args: ["--maxkb=5120"]
+      - id: check-case-conflict
+        name: Check case conflicts
+      - id: check-merge-conflict
+        name: Check merge conflicts
+      - id: mixed-line-ending
+        name: Normalize line endings to LF
+        args: ["--fix=lf"]
+      - id: detect-private-key
+        name: Detect private keys
+
+  # JavaScript/HTML/CSS formatting (if Prettier is installed)
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.1.0
+    hooks:
+      - id: prettier
+        name: Format JavaScript/HTML/CSS
+        types_or: [javascript, html, css, json]
+        exclude: \.min\.(js|css)$
+        args:
+          - "--write"
+          - "--print-width=100"
+          - "--tab-width=2"
+
+# Global exclude patterns
+exclude: |
+  (?x)^(
+    \.git/|
+    \.claude/|
+    node_modules/|
+    \.secrets\.baseline|
+    assets/.*\.(mp4|jpg|jpeg|png|gif|HEIC|heic|webp)$|
+    .*\.min\.(js|css)$
+  )

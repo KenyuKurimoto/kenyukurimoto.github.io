@@ -82,19 +82,33 @@ function renderHeader(p) {
     // Base64デコードでメールアドレスを復元（スパム対策）
     const decodedEmail = atob(p.contact.email);
     // クリック時にのみmailtoを生成（ボット対策）
-    links.push(`<a href="#" class="email-link" data-email="${escHtml(p.contact.email)}">${ICONS.mail} ${escHtml(decodedEmail)}</a>`);
+    links.push(
+      `<a href="#" class="email-link" data-email="${escHtml(p.contact.email)}">${
+        ICONS.mail
+      } ${escHtml(decodedEmail)}</a>`,
+    );
   }
   if (p.contact.github) {
-    links.push(`<a href="${escHtml(p.contact.github)}" target="_blank" rel="noopener">${ICONS.github} GitHub</a>`);
+    links.push(
+      `<a href="${escHtml(p.contact.github)}" target="_blank" rel="noopener">${
+        ICONS.github
+      } GitHub</a>`,
+    );
   }
   if (p.contact.zenn) {
-    links.push(`<a href="${escHtml(p.contact.zenn)}" target="_blank" rel="noopener">${ICONS.zenn} Zenn</a>`);
+    links.push(
+      `<a href="${escHtml(p.contact.zenn)}" target="_blank" rel="noopener">${ICONS.zenn} Zenn</a>`,
+    );
   }
   if (p.contact.linkedin) {
-    links.push(`<a href="${escHtml(p.contact.linkedin)}" target="_blank" rel="noopener">🔗 LinkedIn</a>`);
+    links.push(
+      `<a href="${escHtml(p.contact.linkedin)}" target="_blank" rel="noopener">🔗 LinkedIn</a>`,
+    );
   }
   if (p.contact.twitter) {
-    links.push(`<a href="${escHtml(p.contact.twitter)}" target="_blank" rel="noopener">🐦 Twitter / X</a>`);
+    links.push(
+      `<a href="${escHtml(p.contact.twitter)}" target="_blank" rel="noopener">🐦 Twitter / X</a>`,
+    );
   }
   if (p.contact.blog) {
     links.push(`<a href="${escHtml(p.contact.blog)}" target="_blank" rel="noopener">📝 Blog</a>`);
@@ -105,10 +119,13 @@ function renderHeader(p) {
 /* ── Summary ────────────────────────────────────────────────── */
 function renderSummary(p) {
   const el = document.getElementById("summary-text");
-  if (!p.summary) { el.closest(".section").hidden = true; return; }
+  if (!p.summary) {
+    el.closest(".section").hidden = true;
+    return;
+  }
 
   if (Array.isArray(p.summary)) {
-    el.innerHTML = p.summary.map(paragraph => `<p>${escHtml(paragraph)}</p>`).join("");
+    el.innerHTML = p.summary.map((paragraph) => `<p>${escHtml(paragraph)}</p>`).join("");
   } else {
     el.textContent = p.summary;
   }
@@ -121,14 +138,18 @@ function renderSkills(p) {
     container.closest(".section").hidden = true;
     return;
   }
-  container.innerHTML = p.skills.map(cat => `
+  container.innerHTML = p.skills
+    .map(
+      (cat) => `
     <div class="skill-category">
       <div class="skill-category-name">${escHtml(cat.category)}</div>
       <div class="tag-list">
-        ${cat.tags.map(t => `<span class="tag">${escHtml(t)}</span>`).join("")}
+        ${cat.tags.map((t) => `<span class="tag">${escHtml(t)}</span>`).join("")}
       </div>
     </div>
-  `).join("");
+  `,
+    )
+    .join("");
 }
 
 /* ── Experience ─────────────────────────────────────────────── */
@@ -144,7 +165,9 @@ function renderExperience(p) {
 
     // Company header (always visible)
     const companyNameHtml = job.companyUrl
-      ? `<a href="${escHtml(job.companyUrl)}" target="_blank" rel="noopener">${escHtml(job.company)}</a>`
+      ? `<a href="${escHtml(job.companyUrl)}" target="_blank" rel="noopener">${escHtml(
+          job.company,
+        )}</a>`
       : escHtml(job.company);
 
     card.innerHTML = `
@@ -203,44 +226,52 @@ function renderExperience(p) {
           : "";
 
         // Tech tags
-        const techTags = (proj.tech && proj.tech.length > 0)
-          ? `<div class="project-tech-list">${proj.tech.map(t => `<span class="tag">${escHtml(t)}</span>`).join("")}</div>`
-          : "";
+        const techTags =
+          proj.tech && proj.tech.length > 0
+            ? `<div class="project-tech-list">${proj.tech
+                .map((t) => `<span class="tag">${escHtml(t)}</span>`)
+                .join("")}</div>`
+            : "";
 
         // 統一メディアギャラリー（画像・GIF・MP4動画・YouTube を同じグリッドに並べる）
         let mediaHtml = "";
         const mediaItems = [
-          ...(proj.images || []).map(img => {
+          ...(proj.images || []).map((img) => {
             // 文字列の場合はオブジェクトに変換
-            if (typeof img === 'string') {
+            if (typeof img === "string") {
               return { type: "image", url: img, caption: "" };
             }
             return { type: "image", ...img };
           }),
-          ...(proj.videos || []).map(v   => ({ type: "video", ...v })),
+          ...(proj.videos || []).map((v) => ({ type: "video", ...v })),
           ...(proj.youtube ? [{ type: "youtube", id: extractYouTubeId(proj.youtube) }] : []),
         ];
         if (mediaItems.length > 0) {
           const countClass =
-            mediaItems.length === 1 ? "count-1" :
-            mediaItems.length === 2 ? "count-2" :
-            mediaItems.length === 3 ? "count-3" : "count-many";
+            mediaItems.length === 1
+              ? "count-1"
+              : mediaItems.length === 2
+                ? "count-2"
+                : mediaItems.length === 3
+                  ? "count-3"
+                  : "count-many";
 
-          const cells = mediaItems.map(m => {
-            if (m.type === "image") {
-              return `<div class="media-cell">
+          const cells = mediaItems
+            .map((m) => {
+              if (m.type === "image") {
+                return `<div class="media-cell">
                 <img src="${escHtml(m.url)}" alt="${escHtml(m.caption || "")}" loading="lazy">
                 ${m.caption ? `<div class="media-caption">${escHtml(m.caption)}</div>` : ""}
               </div>`;
-            } else if (m.type === "video") {
-              return `<div class="media-cell">
+              } else if (m.type === "video") {
+                return `<div class="media-cell">
                 <video autoplay loop muted playsinline preload="metadata">
                   <source src="${escHtml(m.url)}" type="video/mp4">
                 </video>
                 ${m.caption ? `<div class="media-caption">${escHtml(m.caption)}</div>` : ""}
               </div>`;
-            } else {
-              return `<div class="media-cell">
+              } else {
+                return `<div class="media-cell">
                 <iframe
                   src="https://www.youtube-nocookie.com/embed/${escHtml(m.id)}"
                   title="YouTube video"
@@ -249,8 +280,9 @@ function renderExperience(p) {
                   loading="lazy"
                 ></iframe>
               </div>`;
-            }
-          }).join("");
+              }
+            })
+            .join("");
 
           mediaHtml = `<div class="project-media-gallery ${countClass}">${cells}</div>`;
         }
@@ -259,37 +291,46 @@ function renderExperience(p) {
         let linksHtml = "";
         if (proj.links && proj.links.length > 0) {
           // プレーンボタン（label のみ指定、ogp: false）
-          const plainLinks = proj.links.filter(l => l.ogp === false);
+          const plainLinks = proj.links.filter((l) => l.ogp === false);
           // OGPカード（デフォルト: ogp: true）
-          const ogpLinks  = proj.links.filter(l => l.ogp !== false);
+          const ogpLinks = proj.links.filter((l) => l.ogp !== false);
 
           const plainHtml = plainLinks.length
             ? `<div class="project-link-buttons">
-                ${plainLinks.map(lnk => `
-                  <a href="${escHtml(lnk.url)}" target="_blank" rel="noopener" class="project-link-btn">
+                ${plainLinks
+                  .map(
+                    (lnk) => `
+                  <a href="${escHtml(
+                    lnk.url,
+                  )}" target="_blank" rel="noopener" class="project-link-btn">
                     ${ICONS.link} ${escHtml(lnk.label)}
-                  </a>`).join("")}
-               </div>` : "";
+                  </a>`,
+                  )
+                  .join("")}
+               </div>`
+            : "";
 
           linksHtml = `<div class="project-links">${plainHtml}</div>`;
 
           // OGPカードは非同期で後から差し込む
           if (ogpLinks.length) {
             // プレースホルダー付き div を返す（data属性にリンク情報を持たせる）
-            const placeholders = ogpLinks.map((lnk, idx) => {
-              const pid = `ogp-${ji}-${pi}-${idx}`;
-              return `<div class="ogp-card-loading" id="${pid}">
+            const placeholders = ogpLinks
+              .map((lnk, idx) => {
+                const pid = `ogp-${ji}-${pi}-${idx}`;
+                return `<div class="ogp-card-loading" id="${pid}">
                 <span class="ogp-spinner"></span>
                 <span>${escHtml(lnk.label || lnk.url)}</span>
               </div>`;
-            }).join("");
+              })
+              .join("");
             linksHtml = `<div class="project-links">${plainHtml}${placeholders}</div>`;
 
             // パネルをDOMに挿入後に非同期フェッチ（後述）
             requestAnimationFrame(() => {
               ogpLinks.forEach((lnk, idx) => {
                 const pid = `ogp-${ji}-${pi}-${idx}`;
-                fetchOgp(lnk.url, lnk.label).then(card => {
+                fetchOgp(lnk.url, lnk.label).then((card) => {
                   const placeholder = document.getElementById(pid);
                   if (placeholder) placeholder.replaceWith(card);
                 });
@@ -323,7 +364,9 @@ function renderEducation(p) {
     list.closest(".section").hidden = true;
     return;
   }
-  list.innerHTML = p.education.map(ed => `
+  list.innerHTML = p.education
+    .map(
+      (ed) => `
     <div class="education-item">
       <div class="edu-icon">🎓</div>
       <div class="edu-info">
@@ -333,7 +376,9 @@ function renderEducation(p) {
         ${ed.note ? `<div class="edu-note">${escHtml(ed.note)}</div>` : ""}
       </div>
     </div>
-  `).join("");
+  `,
+    )
+    .join("");
 }
 
 /* ── Certifications ─────────────────────────────────────────── */
@@ -343,16 +388,21 @@ function renderCertifications(p) {
     list.closest(".section").hidden = true;
     return;
   }
-  list.innerHTML = p.certifications.map(cert => {
-    const badgeHtml = cert.badgeUrl
-      ? `<div class="cert-badge"><img src="${escHtml(cert.badgeUrl)}" alt="${escHtml(cert.name)}"></div>`
-      : `<div class="cert-badge">🏆</div>`;
+  list.innerHTML = p.certifications
+    .map((cert) => {
+      const badgeHtml = cert.badgeUrl
+        ? `<div class="cert-badge"><img src="${escHtml(cert.badgeUrl)}" alt="${escHtml(
+            cert.name,
+          )}"></div>`
+        : `<div class="cert-badge">🏆</div>`;
 
-    const credLink = cert.credentialUrl
-      ? `<a href="${escHtml(cert.credentialUrl)}" target="_blank" rel="noopener" class="cert-link">${ICONS.link} 認定証を見る</a>`
-      : "";
+      const credLink = cert.credentialUrl
+        ? `<a href="${escHtml(
+            cert.credentialUrl,
+          )}" target="_blank" rel="noopener" class="cert-link">${ICONS.link} 認定証を見る</a>`
+        : "";
 
-    return `
+      return `
       <div class="cert-item">
         ${badgeHtml}
         <div class="cert-info">
@@ -363,7 +413,8 @@ function renderCertifications(p) {
         </div>
       </div>
     `;
-  }).join("");
+    })
+    .join("");
 }
 
 /* ── YouTube ID extractor ────────────────────────────────────── */
@@ -407,11 +458,12 @@ async function fetchOgp(url, label) {
 
     const getMeta = (prop) =>
       doc.querySelector(`meta[property="${prop}"]`)?.getAttribute("content") ||
-      doc.querySelector(`meta[name="${prop}"]`)?.getAttribute("content") || "";
+      doc.querySelector(`meta[name="${prop}"]`)?.getAttribute("content") ||
+      "";
 
     const title = getMeta("og:title") || doc.title || label || url;
-    const desc  = getMeta("og:description") || getMeta("description") || "";
-    let   image = getMeta("og:image") || "";
+    const desc = getMeta("og:description") || getMeta("description") || "";
+    let image = getMeta("og:image") || "";
     const domain = new URL(url).hostname;
 
     // 相対パスの画像URLを絶対URLに
@@ -423,9 +475,13 @@ async function fetchOgp(url, label) {
     a.className = "ogp-card";
     a.innerHTML = `
       <div class="ogp-card-image${image ? "" : " no-image"}">
-        ${image
-          ? `<img src="${escHtml(image)}" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-image');this.remove();this.parentElement.textContent='🔗'">`
-          : "🔗"}
+        ${
+          image
+            ? `<img src="${escHtml(
+                image,
+              )}" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-image');this.remove();this.parentElement.textContent='🔗'">`
+            : "🔗"
+        }
       </div>
       <div class="ogp-card-body">
         <div class="ogp-card-title">${escHtml(title)}</div>
@@ -446,23 +502,23 @@ async function fetchOgp(url, label) {
 function initNavHighlight() {
   const navLinks = document.querySelectorAll(".nav-inner a");
   const sections = Array.from(navLinks)
-    .map(a => document.querySelector(a.getAttribute("href")))
+    .map((a) => document.querySelector(a.getAttribute("href")))
     .filter(Boolean);
 
   const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
+    (entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          navLinks.forEach(a => a.classList.remove("active"));
+          navLinks.forEach((a) => a.classList.remove("active"));
           const link = document.querySelector(`.nav-inner a[href="#${entry.target.id}"]`);
           if (link) link.classList.add("active");
         }
       });
     },
-    { rootMargin: "-30% 0px -60% 0px" }
+    { rootMargin: "-30% 0px -60% 0px" },
   );
 
-  sections.forEach(s => observer.observe(s));
+  sections.forEach((s) => observer.observe(s));
 }
 
 /* ── Page title ─────────────────────────────────────────────── */

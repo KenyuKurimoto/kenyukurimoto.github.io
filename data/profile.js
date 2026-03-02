@@ -93,15 +93,7 @@ const PROFILE = {
             "デジタル庁が主導する「複数モビリティの分散協調運行基盤等の在り方に関する実証調査研究」にて、けいはんな地区での実証実験メンバーとして参画。" +
             "全体アーキテクチャの策定に関与しつつ、上位システム（リソース管理サーバー・協調運行基盤）と自社RMSを連携させるためのシステムを開発。" +
             "OSSの群管理システムであるOpen-RMFを自社ロボットの群制御に活用し、RFA規格に準拠したリソース管理サーバーとの接続を通して異なるベンダー間での経路調停を実現した。",
-          tech: [
-            "ROS Jazzy",
-            "Open-RMF",
-            "Nav2",
-            "RFA",
-            "Python",
-            "MQTT",
-            "Zenoh",
-          ],
+          tech: ["ROS Jazzy", "Open-RMF", "Nav2", "RFA", "Python", "MQTT", "Zenoh"],
           images: [],
           videos: [
             {
@@ -200,9 +192,9 @@ const PROFILE = {
           youtube: "",
           links: [
             {
-                label: "STATION Aiでのサイネージモジュール付Cuboid活用",
-                url: "https://www.ros-sier.com/case/implementation-cases/station-ai",
-            }
+              label: "STATION Aiでのサイネージモジュール付Cuboid活用",
+              url: "https://www.ros-sier.com/case/implementation-cases/station-ai",
+            },
           ],
         },
 
@@ -217,14 +209,7 @@ const PROFILE = {
             "REST APIによるエレベーター連携機能を実装するとともに、空間IDを用いた施設情報取得機能や侵入禁止エリアの設定機能を実装。" +
             "また、自社データウェアハウスシステムとの連携による位置情報共有機能を構築し、複数モビリティの協調運行を実現。" +
             "実証後、同時期にRFAにて議論が進められていたリソース管理サーバーに関する実験を社内で実施し、実証内容と併せてROSCon JP 2024にて登壇発表。",
-          tech: [
-            "ROS1 Noetic",
-            "Open-RMF",
-            "RFA",
-            "REST API",
-            "空間ID",
-            "Python",
-          ],
+          tech: ["ROS1 Noetic", "Open-RMF", "RFA", "REST API", "空間ID", "Python"],
           images: [],
           videos: [
             {
@@ -239,8 +224,7 @@ const PROFILE = {
           youtube: "",
           links: [
             {
-              label:
-                "複数のモビリティの協調運行に関する実証調査研究への参加（デジタル庁）",
+              label: "複数のモビリティの協調運行に関する実証調査研究への参加（デジタル庁）",
               url: "https://www.ros-sier.com/case/demonstrations-and-projects/haneda",
             },
             {
@@ -248,8 +232,8 @@ const PROFILE = {
               url: "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/9f4e70e2-2335-4181-8293-258c12549d31/8d42a535/20240508_policies_mobility_report_01.pdf",
             },
             {
-                label: "ROSCon JP 2024 発表資料",
-                url: "https://roscon.ros.org/jp/2024/presentations/03.pdf"
+              label: "ROSCon JP 2024 発表資料",
+              url: "https://roscon.ros.org/jp/2024/presentations/03.pdf",
             },
           ],
         },
@@ -310,8 +294,7 @@ const PROFILE = {
           youtube: "https://www.youtube.com/watch?v=CyYP8fSry-I&t=45s",
           links: [
             {
-              label:
-                "日本初、自動走行ロボットと信号機の連携による屋外配送に成功",
+              label: "日本初、自動走行ロボットと信号機の連携による屋外配送に成功",
               url: "https://www.softbank.jp/corp/news/press/sbkk/2021/20210615_01/",
             },
           ],
