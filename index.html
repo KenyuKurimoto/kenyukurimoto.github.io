@@ -71,7 +71,7 @@
        ============================================================ -->
     <nav class="site-nav" aria-label="セクションナビゲーション">
       <div class="container nav-inner">
-        <a href="#summary">概要</a>
+        <a href="#summary">自己紹介</a>
         <a href="#skills">スキル</a>
         <a href="#experience">職歴</a>
         <a href="#education">学歴</a>
@@ -84,11 +84,11 @@
        ============================================================ -->
     <main class="main-content">
       <div class="container">
-        <!-- ── 概要 ─────────────────────────────────────────────── -->
+        <!-- ── 自己紹介 ─────────────────────────────────────────────── -->
         <section class="section" id="summary">
           <div class="section-header">
             <div class="section-icon blue">👤</div>
-            <h2 class="section-title">概要</h2>
+            <h2 class="section-title">自己紹介</h2>
             <div class="section-divider"></div>
           </div>
           <div class="summary-card">
@@ -167,7 +167,9 @@
     <script src="js/main.js"></script>
     <script>
       // フッターの更新日時をprofile.jsの値からセット
-      document.getElementById("last-updated").textContent = new Date(PROFILE.lastUpdated).toLocaleDateString("ja-JP", {
+      document.getElementById("last-updated").textContent = new Date(
+        PROFILE.lastUpdated,
+      ).toLocaleDateString("ja-JP", {
         year: "numeric",
         month: "long",
         day: "numeric",
