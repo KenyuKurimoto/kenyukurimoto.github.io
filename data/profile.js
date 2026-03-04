@@ -274,6 +274,15 @@ const PROFILE = {
                 "ソフトバンクニュース「空間IDを活用しロボットやドローンの移動を最適化。空間情報の整備に向けた実証実験」",
               url: "https://www.softbank.jp/sbnews/entry/20231101_01",
             },
+            {
+              label:
+                "空間IDを活用した、配送ロボットとARナビゲーションのデータ共有に関する実証実験を実施",
+              url: "https://www.softbank.jp/corp/news/press/sbkk/2023/20230425_01/",
+            },
+            {
+              label: "デジタルツイン構築に関する調査研究 調査報告書",
+              url: "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/9f4e70e2-2335-4181-8293-258c12549d31/38cba97c/20230426_policies_mobility_report_01.pdf",
+            },
           ],
         },
 
