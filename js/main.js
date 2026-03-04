@@ -32,6 +32,93 @@ const ICONS = {
   youtube: `▶`,
 };
 
+/* ── i18n UI strings ────────────────────────────────────────────── */
+const UI_STRINGS = {
+  ja: {
+    nav: {
+      summary: "自己紹介",
+      skills: "スキル",
+      experience: "職歴",
+      education: "学歴",
+      certifications: "資格",
+    },
+    titles: {
+      summary: "自己紹介",
+      skills: "スキル",
+      experience: "職歴",
+      education: "学歴",
+      certifications: "所持資格・認定",
+    },
+    projectsToggle: (n) => `主なプロジェクト詳細 (${n}件)`,
+    viewCredential: "認定証を見る",
+    navAriaLabel: "セクションナビゲーション",
+  },
+  en: {
+    nav: {
+      summary: "About",
+      skills: "Skills",
+      experience: "Experience",
+      education: "Education",
+      certifications: "Certifications",
+    },
+    titles: {
+      summary: "About",
+      skills: "Skills",
+      experience: "Experience",
+      education: "Education",
+      certifications: "Certifications",
+    },
+    projectsToggle: (n) => `Project Details (${n})`,
+    viewCredential: "View Credential",
+    navAriaLabel: "Section navigation",
+  },
+};
+
+/* ── Language management ────────────────────────────────────── */
+function getLang() {
+  return localStorage.getItem("lang") || "ja";
+}
+
+function setLang(lang) {
+  localStorage.setItem("lang", lang);
+}
+
+function getProfile(lang) {
+  if (lang === "en" && PROFILE.en) {
+    const enExp = PROFILE.en.experience || [];
+    return {
+      ...PROFILE,
+      title: PROFILE.en.title || PROFILE.title,
+      summary: PROFILE.en.summary || PROFILE.summary,
+      skills: PROFILE.en.skills || PROFILE.skills,
+      experience: PROFILE.experience.map((job, ji) => {
+        const enJob = enExp[ji] || {};
+        const enProjects = enJob.projects || [];
+        return {
+          ...job,
+          company: enJob.company || job.company,
+          role: enJob.role || job.role,
+          period: enJob.period || job.period,
+          overview: enJob.overview || job.overview,
+          projects: job.projects.map((proj, pi) => {
+            const enProj = enProjects[pi] || {};
+            return {
+              ...proj,
+              name: enProj.name || proj.name,
+              role: enProj.role || proj.role,
+              period: enProj.period || proj.period,
+              description: enProj.description || proj.description,
+            };
+          }),
+        };
+      }),
+      education: PROFILE.en.education || PROFILE.education,
+      certifications: PROFILE.en.certifications || PROFILE.certifications,
+    };
+  }
+  return PROFILE;
+}
+
 /* ── Helpers ────────────────────────────────────────────────── */
 function el(tag, cls, html) {
   const e = document.createElement(tag);
@@ -118,22 +205,24 @@ function renderHeader(p) {
 
 /* ── Summary ────────────────────────────────────────────────── */
 function renderSummary(p) {
-  const el = document.getElementById("summary-text");
+  const summaryEl = document.getElementById("summary-text");
+  summaryEl.closest(".section").hidden = false;
   if (!p.summary) {
-    el.closest(".section").hidden = true;
+    summaryEl.closest(".section").hidden = true;
     return;
   }
 
   if (Array.isArray(p.summary)) {
-    el.innerHTML = p.summary.map((paragraph) => `<p>${escHtml(paragraph)}</p>`).join("");
+    summaryEl.innerHTML = p.summary.map((paragraph) => `<p>${escHtml(paragraph)}</p>`).join("");
   } else {
-    el.textContent = p.summary;
+    summaryEl.textContent = p.summary;
   }
 }
 
 /* ── Skills ─────────────────────────────────────────────────── */
 function renderSkills(p) {
   const container = document.getElementById("skills-grid");
+  container.closest(".section").hidden = false;
   if (!p.skills || p.skills.length === 0) {
     container.closest(".section").hidden = true;
     return;
@@ -153,13 +242,14 @@ function renderSkills(p) {
 }
 
 /* ── Experience ─────────────────────────────────────────────── */
-function renderExperience(p) {
+function renderExperience(p, lang) {
   const list = document.getElementById("experience-list");
+  list.closest(".section").hidden = false;
   if (!p.experience || p.experience.length === 0) {
     list.closest(".section").hidden = true;
     return;
   }
-
+  list.innerHTML = "";
   p.experience.forEach((job, ji) => {
     const card = el("div", "company-card");
 
@@ -191,7 +281,7 @@ function renderExperience(p) {
       const toggleBtn = el("button", "projects-toggle");
       toggleBtn.setAttribute("aria-controls", `projects-${ji}`);
       toggleBtn.innerHTML = `
-        <span>${ICONS.folder} 主なプロジェクト詳細 (${job.projects.length}件)</span>
+        <span>${ICONS.folder} ${UI_STRINGS[lang || "ja"].projectsToggle(job.projects.length)}</span>
         ${ICONS.chevron}
       `;
 
@@ -360,6 +450,7 @@ function renderExperience(p) {
 /* ── Education ──────────────────────────────────────────────── */
 function renderEducation(p) {
   const list = document.getElementById("education-list");
+  list.closest(".section").hidden = false;
   if (!p.education || p.education.length === 0) {
     list.closest(".section").hidden = true;
     return;
@@ -382,8 +473,9 @@ function renderEducation(p) {
 }
 
 /* ── Certifications ─────────────────────────────────────────── */
-function renderCertifications(p) {
+function renderCertifications(p, lang) {
   const list = document.getElementById("cert-list");
+  list.closest(".section").hidden = false;
   if (!p.certifications || p.certifications.length === 0) {
     list.closest(".section").hidden = true;
     return;
@@ -399,7 +491,9 @@ function renderCertifications(p) {
       const credLink = cert.credentialUrl
         ? `<a href="${escHtml(
             cert.credentialUrl,
-          )}" target="_blank" rel="noopener" class="cert-link">${ICONS.link} 認定証を見る</a>`
+          )}" target="_blank" rel="noopener" class="cert-link">${ICONS.link} ${
+            UI_STRINGS[lang || "ja"].viewCredential
+          }</a>`
         : "";
 
       return `
@@ -523,7 +617,11 @@ function initNavHighlight() {
 
 /* ── Page title ─────────────────────────────────────────────── */
 function setPageTitle(p) {
-  document.title = `${p.name} | ${p.title}`;
+  if (getLang() === "en") {
+    document.title = `${p.nameEn} | ${p.title}`;
+  } else {
+    document.title = `${p.name} | ${p.title}`;
+  }
 }
 
 /* ── Email link handler (anti-spam) ─────────────────────── */
@@ -541,6 +639,71 @@ function initEmailLinks() {
   });
 }
 
+/* ── i18n DOM updates ───────────────────────────────────────── */
+function updateNavLabels(lang) {
+  const s = UI_STRINGS[lang];
+  const ids = ["summary", "skills", "experience", "education", "certifications"];
+  ids.forEach((id) => {
+    const navEl = document.getElementById(`nav-${id}`);
+    if (navEl) navEl.textContent = s.nav[id];
+  });
+  const nav = document.querySelector(".site-nav");
+  if (nav) nav.setAttribute("aria-label", s.navAriaLabel);
+}
+
+function updateSectionTitles(lang) {
+  const s = UI_STRINGS[lang];
+  const ids = ["summary", "skills", "experience", "education", "certifications"];
+  ids.forEach((id) => {
+    const titleEl = document.getElementById(`title-${id}`);
+    if (titleEl) titleEl.textContent = s.titles[id];
+  });
+}
+
+function updateLangToggleBtn(lang) {
+  const btn = document.getElementById("lang-toggle");
+  if (btn) {
+    btn.textContent = lang === "ja" ? "EN" : "JA";
+    btn.setAttribute("aria-label", lang === "ja" ? "Switch to English" : "日本語に切り替え");
+  }
+}
+
+/* ── Apply language ─────────────────────────────────────────── */
+function applyLang(lang) {
+  const p = getProfile(lang);
+  document.documentElement.lang = lang;
+  const ogLocale = document.querySelector('meta[property="og:locale"]');
+  if (ogLocale) ogLocale.setAttribute("content", lang === "en" ? "en_US" : "ja_JP");
+  updateLangToggleBtn(lang);
+  updateNavLabels(lang);
+  updateSectionTitles(lang);
+  setPageTitle(p);
+  renderHeader(p);
+  renderSummary(p);
+  renderSkills(p);
+  renderExperience(p, lang);
+  renderEducation(p);
+  renderCertifications(p, lang);
+  const lastUpdatedEl = document.getElementById("last-updated");
+  if (lastUpdatedEl) {
+    lastUpdatedEl.textContent = new Date(PROFILE.lastUpdated).toLocaleDateString(
+      lang === "en" ? "en-US" : "ja-JP",
+      { year: "numeric", month: "long", day: "numeric" },
+    );
+  }
+}
+
+/* ── Lang toggle ────────────────────────────────────────────── */
+function initLangToggle() {
+  const btn = document.getElementById("lang-toggle");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    const newLang = getLang() === "ja" ? "en" : "ja";
+    setLang(newLang);
+    applyLang(newLang);
+  });
+}
+
 /* ── Boot ───────────────────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof PROFILE === "undefined") {
@@ -548,13 +711,9 @@ document.addEventListener("DOMContentLoaded", () => {
       "<p style='padding:40px;color:red'>Error: data/profile.js が読み込まれていません。</p>";
     return;
   }
-  setPageTitle(PROFILE);
-  renderHeader(PROFILE);
-  renderSummary(PROFILE);
-  renderSkills(PROFILE);
-  renderExperience(PROFILE);
-  renderEducation(PROFILE);
-  renderCertifications(PROFILE);
+  const lang = getLang();
+  applyLang(lang);
   initNavHighlight();
   initEmailLinks();
+  initLangToggle();
 });

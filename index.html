@@ -63,6 +63,9 @@
         <div class="contact-links" id="contact-links">
           <!-- JS で描画 -->
         </div>
+        <div class="lang-toggle-wrap">
+          <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">EN</button>
+        </div>
       </div>
     </header>
 
@@ -71,11 +74,11 @@
        ============================================================ -->
     <nav class="site-nav" aria-label="セクションナビゲーション">
       <div class="container nav-inner">
-        <a href="#summary">自己紹介</a>
-        <a href="#skills">スキル</a>
-        <a href="#experience">職歴</a>
-        <a href="#education">学歴</a>
-        <a href="#certifications">資格</a>
+        <a href="#summary" id="nav-summary">自己紹介</a>
+        <a href="#skills" id="nav-skills">スキル</a>
+        <a href="#experience" id="nav-experience">職歴</a>
+        <a href="#education" id="nav-education">学歴</a>
+        <a href="#certifications" id="nav-certifications">資格</a>
       </div>
     </nav>
 
@@ -88,7 +91,7 @@
         <section class="section" id="summary">
           <div class="section-header">
             <div class="section-icon blue">👤</div>
-            <h2 class="section-title">自己紹介</h2>
+            <h2 class="section-title" id="title-summary">自己紹介</h2>
             <div class="section-divider"></div>
           </div>
           <div class="summary-card">
@@ -102,7 +105,7 @@
         <section class="section" id="skills">
           <div class="section-header">
             <div class="section-icon mint">⚡</div>
-            <h2 class="section-title">スキル</h2>
+            <h2 class="section-title" id="title-skills">スキル</h2>
             <div class="section-divider"></div>
           </div>
           <div class="skills-grid" id="skills-grid">
@@ -114,7 +117,7 @@
         <section class="section" id="experience">
           <div class="section-header">
             <div class="section-icon blue">💼</div>
-            <h2 class="section-title">職歴</h2>
+            <h2 class="section-title" id="title-experience">職歴</h2>
             <div class="section-divider"></div>
           </div>
           <div class="experience-list" id="experience-list">
@@ -126,7 +129,7 @@
         <section class="section" id="education">
           <div class="section-header">
             <div class="section-icon amber">🎓</div>
-            <h2 class="section-title">学歴</h2>
+            <h2 class="section-title" id="title-education">学歴</h2>
             <div class="section-divider"></div>
           </div>
           <div class="education-list" id="education-list">
@@ -138,7 +141,7 @@
         <section class="section" id="certifications">
           <div class="section-header">
             <div class="section-icon amber">🏆</div>
-            <h2 class="section-title">所持資格・認定</h2>
+            <h2 class="section-title" id="title-certifications">所持資格・認定</h2>
             <div class="section-divider"></div>
           </div>
           <div class="cert-list" id="cert-list">
@@ -165,15 +168,5 @@
     <script src="data/profile.js"></script>
     <!-- 2. メインスクリプト -->
     <script src="js/main.js"></script>
-    <script>
-      // フッターの更新日時をprofile.jsの値からセット
-      document.getElementById("last-updated").textContent = new Date(
-        PROFILE.lastUpdated,
-      ).toLocaleDateString("ja-JP", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-    </script>
   </body>
 </html>
