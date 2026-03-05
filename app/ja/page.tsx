@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Hero from "@/components/Hero";
 import Section from "@/components/Section";
-import Summary from "@/components/Summary";
+import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
@@ -34,8 +34,8 @@ export default function JaPage() {
 
       <main className="py-14 bg-bg">
         <div className="container-custom">
-          <Section id="summary" title="自己紹介" icon="👤" iconColor="blue">
-            <Summary paragraphs={profileJa.summary} />
+          <Section id="about" title="自己紹介" icon="👤" iconColor="blue">
+            <About paragraphs={profileJa.about} />
           </Section>
 
           <Section id="skills" title="スキル" icon="⚡" iconColor="mint">

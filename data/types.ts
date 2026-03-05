@@ -63,7 +63,7 @@ export interface ProfileData {
   nameEn: string;
   title: string;
   avatar?: string;
-  summary: string[];
+  about: string[];
   contact: Contact;
   skills: SkillCategory[];
   experience: Experience[];

@@ -1,8 +1,8 @@
-interface SummaryProps {
+interface AboutProps {
   paragraphs: string[];
 }
 
-export default function Summary({ paragraphs }: SummaryProps) {
+export default function About({ paragraphs }: AboutProps) {
   return (
     <div className="bg-card border border-border rounded-md p-6 md:p-7 shadow-sm">
       {paragraphs.map((paragraph, index) => (

@@ -6,7 +6,7 @@ export const profileEn: ProfileData = {
   nameEn: "栗本 健有",
   title: "Software Engineer",
   avatar: "/assets/avatar.jpg",
-  summary: [
+  about: [
     "After completing my master's degree, I have worked on in-house robot development end-to-end—from hardware design and assembly to ROS-based software and CI. My main focus has been integrating robots with building and facility infrastructure, including elevators, automatic doors, and Facility Resource Management Servers (defined by the Robot Friendly Asset Promotion Association: RFA).",
     "With the rise of generative AI, I believe that the value expected of engineers is expanding beyond implementation to include system vision and integration. My goal is to design and deliver systems that connect generative AI with robots and social infrastructure—from prototyping to real-world deployment.",
     "My first area of interest is Physical AI (AI for embodied robots). Building on my background in deep learning and computer vision, I want to advance AI-powered service robots and their deployment in society.",
