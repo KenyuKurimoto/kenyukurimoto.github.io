@@ -92,7 +92,15 @@ export default function ProjectItem({ project }: ProjectItemProps) {
                   >
                     {isYoutube ? (
                       <iframe
-                        src={media.url.replace("watch?v=", "embed/")}
+                        src={(() => {
+                          const url = new URL(media.url);
+                          const videoId = url.searchParams.get("v");
+                          const t = url.searchParams.get("t");
+                          const seconds = t ? parseInt(t.replace(/s$/, ""), 10) : null;
+                          return `https://www.youtube.com/embed/${videoId}${
+                            seconds ? `?start=${seconds}` : ""
+                          }`;
+                        })()}
                         className="absolute inset-0 w-full h-full"
                         allowFullScreen
                       />
