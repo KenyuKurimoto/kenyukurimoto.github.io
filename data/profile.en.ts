@@ -70,7 +70,7 @@ export const profileEn: ProfileData = {
           role: "Software Engineer / Architect",
           description:
             "Participated as a member of the Keihanna district demonstration in the 'Research on Distributed Cooperative Operation Infrastructure for Multiple Mobilities' led by the Digital Agency. Involved in overall architecture definition while developing a system to integrate the higher-level systems (resource management server / cooperative operation infrastructure) with our company's Robot Management System. Leveraged Open-RMF, an OSS fleet management system, for fleet control of our robots, and achieved cross-vendor route arbitration through connection with an RFA-compliant resource management server.",
-          tech: ["ROS Jazzy", "Open-RMF", "Nav2", "RFA", "Python", "MQTT", "Zenoh"],
+          tech: ["ROS Jazzy", "Open-RMF", "Nav2", "Python", "MQTT", "Zenoh"],
           videos: [
             {
               url: "/assets/keihanna_1.mp4",
@@ -139,8 +139,8 @@ export const profileEn: ProfileData = {
           period: "2024",
           role: "Software Engineer",
           description:
-            "Engaged in robot introduction support as part of the 'STATION Ai' facility operations project contracted from Aichi Prefecture. Connected with the 'LCI' system provided by Octa Robotics, enabling integration with elevators and automatic doors conforming to the RFA standard. Implemented web app integration for our robot and developed call/patrol applications with route planning that accounts for elevator and automatic door positions. Added integration with 'Transbots,' a fleet management system provided by TOPPAN Holdings, and contributed to on-site deployment work at the facility.",
-          tech: ["ROS1 Noetic", "Transbots", "RFA", "MQTT", "Python"],
+            "Engaged in robot introduction support as part of the 'STATION Ai' facility operations project contracted from Aichi Prefecture. Connected with the 'LCI' system provided by Octa Robotics, enabling integration with elevators and automatic doors conforming to the RFA standard. Implemented web app integration for our robot and developed call/patrol applications with route planning that accounts for elevator and automatic door positions. Added integration with 'TransBots,' a fleet management system provided by TOPPAN Holdings, and contributed to on-site deployment work at the facility.",
+          tech: ["ROS1 Noetic", "TransBots", "MQTT", "Python"],
           videos: [
             {
               url: "/assets/stai_door.mp4",
@@ -164,7 +164,7 @@ export const profileEn: ProfileData = {
           role: "Software Engineer / Architect",
           description:
             "Participated in the Digital Agency's 'Demonstration Research on Cooperative Operation of Multiple Mobilities,' developing a distributed cooperative framework integrating multiple robots and building infrastructure systems. Led the definition of common specifications with partner companies and software architecture design, and developed ROS robot programs following the distributed cooperative framework. Modified our robot's driving flow based on the premise of sharing 2D maps and topological graph information across vendors. Implemented elevator integration via REST API, facility information retrieval using spatial IDs, and keepout zone configuration. Also built location information sharing via our company's data warehouse system. After the demonstration, conducted in-house experiments on resource management servers being discussed in RFA, and presented at ROSCon JP 2024.",
-          tech: ["ROS1 Noetic", "Open-RMF", "RFA", "REST API", "Spatial ID", "Python"],
+          tech: ["ROS1 Noetic", "Open-RMF", "REST API", "Spatial ID", "Python"],
           videos: [
             {
               url: "/assets/hic_elv_mediation.mp4",

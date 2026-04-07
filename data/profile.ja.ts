@@ -70,7 +70,7 @@ export const profileJa: ProfileData = {
           role: "ソフトウェアエンジニア / アーキテクト",
           description:
             "デジタル庁が主導する「複数モビリティの分散協調運行基盤等の在り方に関する実証調査研究」にて、けいはんな地区での実証実験メンバーとして参画。全体アーキテクチャの策定に関与しつつ、上位システム（リソース管理サーバー・協調運行基盤）と自社RMSを連携させるためのシステムを開発。OSSの群管理システムであるOpen-RMFを自社ロボットの群制御に活用し、RFA規格に準拠したリソース管理サーバーとの接続を通して異なるベンダー間での経路調停を実現した。",
-          tech: ["ROS Jazzy", "Open-RMF", "Nav2", "RFA", "Python", "MQTT", "Zenoh"],
+          tech: ["ROS Jazzy", "Open-RMF", "Nav2", "Python", "MQTT", "Zenoh"],
           videos: [
             {
               url: "/assets/keihanna_1.mp4",
@@ -138,8 +138,8 @@ export const profileJa: ProfileData = {
           period: "2024年",
           role: "ソフトウェアエンジニア",
           description:
-            "愛知県庁から受託した「STATION Ai」の整備運営事業の一環として、ロボット導入支援に従事。Octa Robotics社提供の「LCI」システムと接続し、RFA標準規格に準拠したエレベーター・自動ドアとの連携を実現。自社ロボットのウェブアプリ連携機能を実装し、エレベーター・自動ドア位置を考慮に入れた経路設計を含む呼び出し・巡回アプリケーションを開発。TOPPANホールディングス社提供の群管理システム「Transbots」との連携機能を追加し、施設現地における導入作業全般に貢献。",
-          tech: ["ROS1 Noetic", "Transbots", "RFA", "MQTT", "Python"],
+            "愛知県庁から受託した「STATION Ai」の整備運営事業の一環として、ロボット導入支援に従事。Octa Robotics社提供の「LCI」システムと接続し、RFA標準規格に準拠したエレベーター・自動ドアとの連携を実現。自社ロボットのウェブアプリ連携機能を実装し、エレベーター・自動ドア位置を考慮に入れた経路設計を含む呼び出し・巡回アプリケーションを開発。TOPPANホールディングス社提供の群管理システム「TransBots」との連携機能を追加し、施設現地における導入作業全般に貢献。",
+          tech: ["ROS1 Noetic", "MQTT", "Python"],
           videos: [
             {
               url: "/assets/stai_door.mp4",
@@ -163,7 +163,7 @@ export const profileJa: ProfileData = {
           role: "ソフトウェアエンジニア / アーキテクト",
           description:
             "デジタル庁の「複数のモビリティの協調運行に関する実証調査研究」に参画し、複数のロボットとビルインフラシステムを統合した分散協調フレームワークを開発。協業他社との共通仕様策定やソフトウェアアーキテクチャ設計にリードメンバーとして参加し、分散協調の枠組に則ったROSロボットのプログラムを開発。2次元地図とトポロジカル・グラフ情報をベンダー間で共有してそれに則った走行を実施する前提に従い、自社ロボットの走行フローを改修。REST APIによるエレベーター連携機能を実装するとともに、空間IDを用いた施設情報取得機能や侵入禁止エリアの設定機能を実装。また、自社データウェアハウスシステムとの連携による位置情報共有機能を構築し、複数モビリティの協調運行を実現。実証後、同時期にRFAにて議論が進められていたリソース管理サーバーに関する実験を社内で実施し、実証内容と併せてROSCon JP 2024にて登壇発表。",
-          tech: ["ROS1 Noetic", "Open-RMF", "RFA", "REST API", "空間ID", "Python"],
+          tech: ["ROS1 Noetic", "Open-RMF", "REST API", "空間ID", "Python"],
           videos: [
             {
               url: "/assets/hic_elv_mediation.mp4",
